@@ -1,0 +1,52 @@
+ Routh Hurwitz Criterion
+=========================
+
+Routh Hurwitz criterion is used for finding out stability of a control system
+by using its transfer function. For this we form a Routh Hurwitz table and
+check the first column. If there are any sign changes in the first column, the
+control system is unstable. The system is stable otherwise.
+
+For details refer http://users.encs.concordia.ca/~grogono/Writings/consys.pdf
+
+ Usage
+=======
+
+Input
+A vector of coefficients of the characteristic equation of the control system.
+
+For ex.
+If the control system has the characteristic equation
+
+	A5 s^5 + A4 s^4 + A3 s^3 + A2 s^2 + A1 s^1 + A0 = 0
+
+Vector of coefficients
+
+	>> a = [A5, A4, A3, A2, A1, A0];
+
+Make sure that all the four source files are in working directory.
+Run this command to get complete result on using the routh hurwitz criterion.
+
+	>> complete_routh(a);
+
+ Source Files
+==============
+
+1. complete_routh.m
+   Takes coefficient vector as input and prints the complete
+   routh hurwitz table and result accordingly.
+   Calls various functions to make routh hurwitz table, check
+   for sign changes and completing incomplete table.
+
+2. make_routh_table.m
+   Given coefficient vector, this function forms an initial matrix of
+   routh table. Then it completes the table by calling inish_incomplete_routh
+   function.
+
+3. finish_incomplete_routh.m
+   Given an matrix of incomplete routh table and the degree of the
+   characteristic equation, this function tries to complete the routh table.
+   It exits on its first encounter with 0 as the first element of any row.
+
+4. num_sign_changes.m
+   Given the complete routh table, this function analyses its first column
+   and returns the number of sign changes occurring.
