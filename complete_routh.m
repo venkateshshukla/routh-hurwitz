@@ -26,7 +26,16 @@ if size(nonzeros,2) == 0
         fprintf('\nComplete routh table has been formed. Checking for sign changes.\n\n');
     else
         % all elements are zero. Make auxiliary matrix
-        fprintf('\nAll elements are zero. We should make auxiliary matrix.\n\n');
+
+        % Display the incomplete routh table formed in a pretty format
+        fprintf('\n Incomplete Routh Table\n==========================\n');
+        for i = 1:len
+            fprintf('S%d\t', degree + 1 - i);
+            fprintf('%15.6f ', routh_table(i, :));
+            fprintf('\n');
+        end
+
+        fprintf('\nAll elements are zero. We should make auxiliary equation.\n\n');
         pwr = degree - len + 2;
         for i = 1:bre-1
             routh_table(len, i) = routh_table(len-1, i)*pwr;
@@ -36,6 +45,13 @@ if size(nonzeros,2) == 0
     end
 else
     %First element is zero, not all are zero
+    % Display the incomplete routh table formed in a pretty format
+    fprintf('\n Incomplete Routh Table\n============================\n');
+    for i = 1:len
+        fprintf('S%d\t', degree + 1 - i);
+        fprintf('%15.6f ', routh_table(i, :));
+        fprintf('\n');
+    end
     format long
     fprintf('\nFirst element is zero.');
     fprintf('We have to further solve using limits and then check for sign changes.\n\n');
@@ -44,7 +60,7 @@ else
 end
 
 % Display the routh table formed in a pretty format
-fprintf(' Routh Table\n=============\n');
+fprintf(' Complete Routh Table\n=========================\n');
 for i = 1:degree+1
     fprintf('S%d\t', degree + 1 - i);
     fprintf('%15.6f ', routh_table(i, :));
