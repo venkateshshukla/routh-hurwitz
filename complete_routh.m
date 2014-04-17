@@ -1,5 +1,5 @@
 function complete_routh(coeff_vector)
-% Prints result after solving the Routh Hurwitz Stability 
+% Prints result after solving the Routh Hurwitz Stability
 % Criterion for given coefficient vector
 
 degree = size(coeff_vector,2) - 1;
@@ -13,11 +13,12 @@ fprintf('%d = 0\n', coeff_vector(degree+1));
 
 %Make initial Routh Hurwitz table
 routh_table = make_routh_table(coeff_vector);
-len = size(routh_table,1);
+len = size(routh_table, 1);
 bre = size(routh_table, 2);
 last_row = routh_table(len,:);
 nonzeros = find(last_row);
 
+while len ~= degree+2
 %Analyse the cases
 if size(nonzeros,2) == 0
     %either all zero or complete Routh table made
@@ -57,6 +58,8 @@ else
     fprintf('We have to further solve using limits and then check for sign changes.\n\n');
     routh_table(len,1) = 0.000001;
     routh_table = finish_incomplete_routh(routh_table, degree);
+end
+len = size(routh_table, 1);
 end
 
 % Display the routh table formed in a pretty format
